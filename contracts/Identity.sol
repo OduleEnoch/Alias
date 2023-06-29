@@ -43,12 +43,17 @@ contract IdentityContract {
         return (identity.name, identity.email, identity.number);
     }
 
-    function updateIdentifier(uint256 _identityId, string memory _name, string memory _email, uint256 _number) public{
+    function updateIdentity(uint256 _identityId, string memory _name, string memory _email, uint256 _number) public{
         Identity storage identity = Identities[_identityId];
 
         identity.name = _name;
         identity.email = _email;
         identity.number = _number;
     }
+
+    function deleteIdentity(uint256 _identityId) public {
+        delete Identities[_identityId];
+    }
+
 }
 
