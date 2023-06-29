@@ -36,5 +36,11 @@ contract IdentityContract {
 
         return newIdentityId;
     }
+
+    function getIdentity(uint256 _identityId) public view returns (string memory, string memory, uint256) {
+        Identity memory identity = Identities[_identityId];
+
+        return (identity.name, identity.email, identity.number);
+    }
 }
 
