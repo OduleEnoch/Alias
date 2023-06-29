@@ -1,0 +1,24 @@
+{
+  "name": "alias",
+  "version": "1.0.0",
+  "description": "A decentralized Identity system that utilizes Blockchain Technology",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lawwee/Alias.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lawwee/Alias/issues"
+  },
+  "homepage": "https://github.com/lawwee/Alias#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.16.1"
+  }
+}
