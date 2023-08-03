@@ -24,11 +24,11 @@ async function main() {
             // console.log("New User created");
 
     // GETUSERINFO
-        // sceipt for getting the information of an already registered user (SUCCESS)
+        // script for getting the information of an already registered user (SUCCESS)
             let registeredUser = await userContract.getUserInfo();
             console.log(registeredUser);
         
-        // sceipt for getting the information of an already registered user (FAILURE - Unregistered user)
+        // script for getting the information of an already registered user (FAILURE - Unregistered user)
             // registeredUser = await userContract.connect(randomUser).getUserInfo();
             // console.log(registeredUser);
 }

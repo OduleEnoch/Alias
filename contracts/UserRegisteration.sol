@@ -14,10 +14,16 @@ contract UserRegistration {
     mapping(address => User) public users;
 
     event UserRegistered(address indexed userAddress, string name, string email);
+    event UserInfoUpdated(address indexed userAddress, string newName, string newEmail);
 
     // modifier to prevent an address from registering twice
     modifier onlyNotRegistered() {
         require(!users[msg.sender].isRegistered, "User already registered");
+        _;
+    }
+
+    modifier onlyRegistered() {
+        require(users[msg.sender].isRegistered, "User does not exist");
         _;
     }
 
@@ -41,5 +47,13 @@ contract UserRegistration {
     function getUserInfo() external view returns (string memory, string memory, address) {
         require(users[msg.sender].isRegistered, "User not registered");
         return (users[msg.sender].name, users[msg.sender].email, users[msg.sender].userAddress);
+    }
+    
+    // allows users to update their information
+    function updateUserInfo(string memory _newName, string memory _newEmail) external onlyRegistered {
+        User storage user = users[msg.sender];
+        user.name = _newName;
+        user.email = _newEmail;
+        emit UserInfoUpdated(msg.sender, _newName, _newEmail);
     }
 }
