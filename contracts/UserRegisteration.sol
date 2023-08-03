@@ -18,12 +18,12 @@ contract UserRegistration {
 
     // modifier to prevent an address from registering twice
     modifier onlyNotRegistered() {
-        require(!users[msg.sender].isRegistered, "User already registered");
+        require(!users[msg.sender].isRegistered, "USERREG: User already registered");
         _;
     }
 
     modifier onlyRegistered() {
-        require(users[msg.sender].isRegistered, "User does not exist");
+        require(users[msg.sender].isRegistered, "USERREG: User not registered");
         _;
     }
 
@@ -44,8 +44,7 @@ contract UserRegistration {
     }
 
     // gets the information of a registered user
-    function getUserInfo() external view returns (string memory, string memory, address) {
-        require(users[msg.sender].isRegistered, "User not registered");
+    function getUserInfo() external view onlyRegistered returns (string memory, string memory, address) {
         return (users[msg.sender].name, users[msg.sender].email, users[msg.sender].userAddress);
     }
     
