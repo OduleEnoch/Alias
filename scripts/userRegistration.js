@@ -5,6 +5,7 @@ const hre = require("hardhat");
 // All scripts tagged as "FAILURE" are commented out by default.Remove comment to test out the desired script. SAme goes for any other script that has been commented out.
 
 async function main() {
+    const [ owner, randomUser ] = await ethers.getSigners();
     const userContract = await ethers.deployContract("UserRegistration");
 
     await userContract.waitForDeployment();
@@ -24,6 +25,12 @@ async function main() {
 
     // GETUSERINFO
         // sceipt for getting the information of an already registered user (SUCCESS)
+            let registeredUser = await userContract.getUserInfo();
+            console.log(registeredUser);
+        
+        // sceipt for getting the information of an already registered user (FAILURE - Unregistered user)
+            // registeredUser = await userContract.connect(randomUser).getUserInfo();
+            // console.log(registeredUser);
 }
 
 main().catch((error) => {

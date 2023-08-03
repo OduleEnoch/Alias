@@ -23,7 +23,7 @@ contract UserRegistration {
 
     constructor() {}
 
-    // registers a new user unto the platform
+    // registers a new user unto the platform 
     function registerUser(string memory _name, string memory _email) external onlyNotRegistered {
         User memory newUser = User({
             name: _name,
