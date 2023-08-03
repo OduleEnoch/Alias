@@ -37,8 +37,9 @@ contract UserRegistration {
         emit UserRegistered(msg.sender, _name, _email);
     }
 
-    // function getUserInfo() external view returns (string memory, string memory, address) {
-    //     require(users[msg.sender].isRegistered, "User not registered");
-    //     return (users[msg.sender].name, users[msg.sender].email, users[msg.sender].userAddress);
-    // }
+    // gets the information of a registered user
+    function getUserInfo() external view returns (string memory, string memory, address) {
+        require(users[msg.sender].isRegistered, "User not registered");
+        return (users[msg.sender].name, users[msg.sender].email, users[msg.sender].userAddress);
+    }
 }
