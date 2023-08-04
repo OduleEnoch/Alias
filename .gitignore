@@ -4,6 +4,7 @@ coverage
 coverage.json
 typechain
 typechain-types
+user-registration-contract-address.json
 
 # Hardhat files
 cache

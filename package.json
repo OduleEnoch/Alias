@@ -4,7 +4,7 @@
   "description": "A decentralized Identity system that utilizes Blockchain Technology",
   "main": "index.js",
   "scripts": {
-    "start": "npx hardhat run scripts/userRegistration.js",
+    "start": "npx hardhat run scripts/userRegistration.js && npx hardhat run scripts/identityManagement.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

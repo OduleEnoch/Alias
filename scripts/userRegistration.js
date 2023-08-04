@@ -1,16 +1,21 @@
-const hre = require("hardhat");
-
 // This is a script that contains a series of automated scripts targeted at testing out the various functions that have been created in the UserRegistration contract.
 
-// All scripts tagged as "FAILURE" are commented out by default.Remove comment to test out the desired script. SAme goes for any other script that has been commented out.
+// All scripts tagged as "FAILURE" are commented out by default.Remove comment to test out the desired script. Same goes for any other script that has been commented out.
+
+const hre = require("hardhat");
+const fs = require("fs");
 
 async function main() {
     const [ owner, randomUser ] = await ethers.getSigners();
     const userContract = await ethers.deployContract("UserRegistration");
 
-    await userContract.waitForDeployment();
+    // await userContract.waitForDeployment();
     
     console.log('Contract deployed to; ',  await userContract.getAddress());
+
+    const userRegistrationContractAddress = await userContract.getAddress();
+    fs.writeFileSync("./user-registration-contract-address.json", userRegistrationContractAddress);
+
 
     // *************REGISTER USER***************
         // script for registring a new user into the system (SUCCESS)
@@ -49,6 +54,7 @@ async function main() {
         // script foor checking if a user is registered (SUCCESS)
             let userState = await userContract.checkUserRegistration(owner.address);
             console.log(userState);
+            console.log(owner.address);
 }
 
 main().catch((error) => {

@@ -4,9 +4,8 @@ pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 import "./UserRegistration.sol"; // Import the User Registration Contract
-import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract IdentityManagement {
+contract IdentityManagement is UserRegistration {
 
     UserRegistration private userRegistration;
 
