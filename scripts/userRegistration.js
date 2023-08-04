@@ -40,6 +40,10 @@ async function main() {
             // user = await userContract.connect(randomUser).updateUserInfo("Lawal", "lawal@mail.com");
             // await user.wait();
 
+    // **************DEACTIVATE USER****************
+        // script for deactivating a registered user's account (SUCCESS)
+            registeredUser = await userContract.deactivateUser();
+            console.log("User Deactivated successfully");
 }
 
 main().catch((error) => {

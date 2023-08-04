@@ -15,6 +15,7 @@ contract UserRegistration {
 
     event UserRegistered(address indexed userAddress, string name, string email);
     event UserInfoUpdated(address indexed userAddress, string newName, string newEmail);
+    event UserDeactivated(address indexed userAddress);
 
     // modifier to prevent an address from registering twice
     modifier onlyNotRegistered() {
@@ -54,5 +55,11 @@ contract UserRegistration {
         user.name = _newName;
         user.email = _newEmail;
         emit UserInfoUpdated(msg.sender, _newName, _newEmail);
+    }
+
+    function deactivateUser() external onlyRegistered {
+        users[msg.sender].isRegistered = false;
+
+        emit UserDeactivated(msg.sender);
     }
 }
