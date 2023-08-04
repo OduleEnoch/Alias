@@ -1,57 +1,57 @@
-// // SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: Unlicense
 
-// pragma solidity ^0.8.0;
+pragma solidity ^0.8.0;
 
-// import "hardhat/console.sol";
-// import "./UserRegistration.sol"; // Import the User Registration Contract
-// import "@openzeppelin/contracts/utils/Counters.sol";
+import "hardhat/console.sol";
+import "./UserRegistration.sol"; // Import the User Registration Contract
+import "@openzeppelin/contracts/utils/Counters.sol";
 
-// contract IdentityManagement {
+contract IdentityManagement {
 
-//     UserRegistration private userRegistration;
+    UserRegistration private userRegistration;
 
-//     struct Identity {
-//         // Store user certificates (in a real-world scenario, these could be IPFS hashes or other data references)
-//         bytes32[] certificates;
+    struct Identity {
+        // Store user certificates (in a real-world scenario, these could be IPFS hashes or other data references)
+        bytes32[] certificates;
         
-//         // Store user attributes (e.g., age, address, etc.)
-//         mapping(string => string) attributes; 
+        // Store user attributes (e.g., age, address, etc.)
+        mapping(string => string) attributes; 
+    }
+
+    mapping(address => Identity) internal identities;
+
+    event CertificateAdded(address indexed userAddress, bytes32 certificate);
+    event AttributeSet(address indexed userAddress, string attributeName, string attributeValue);
+
+    modifier onlyRegisteredUser() {
+        require(userRegistration.checkUserRegistration(msg.sender), "IDMGT: User not registered");
+        _;
+    }
+
+    constructor(address _userRegistrationAddress) {
+        userRegistration = UserRegistration(_userRegistrationAddress);
+    }
+
+    function setAttribute(string memory attributeName, string memory attributeValue) external onlyRegisteredUser {
+        identities[msg.sender].attributes[attributeName] = attributeValue;
+        emit AttributeSet(msg.sender, attributeName, attributeValue);
+    }
+
+}
+
+
+// contract IdentityManagementContract {
+//     function getAttribute(string memory attributeName) external view onlyRegisteredUser returns (string memory) {
+//         return identities[msg.sender].attributes[attributeName];
 //     }
 
-//     mapping(address => Identity) internal identities;
-
-//     event CertificateAdded(address indexed userAddress, bytes32 certificate);
-//     event AttributeSet(address indexed userAddress, string attributeName, string attributeValue);
-
-//     modifier onlyRegisteredUser() {
-//         require(userRegistration.onlyRegistered(), "IDMGT: User not registered");
-//         _;
+//     function addCertificate(bytes32 certificate) external onlyRegisteredUser {
+//         identities[msg.sender].certificates.push(certificate);
+//         emit CertificateAdded(msg.sender, certificate);
 //     }
 
-//     constructor(address _userRegistrationAddress) {
-//         userRegistration = UserRegistration(_userRegistrationAddress);
+//     function getCertificates() external view onlyRegisteredUser returns (bytes32[] memory) {
+//         return identities[msg.sender].certificates;
 //     }
-
-//     function setAttribute(string memory attributeName, string memory attributeValue) external onlyRegisteredUser {
-//         identities[msg.sender].attributes[attributeName] = attributeValue;
-//         emit AttributeSet(msg.sender, attributeName, attributeValue);
-//     }
-
 // }
-
-
-// // contract IdentityManagementContract {
-// //     function getAttribute(string memory attributeName) external view onlyRegisteredUser returns (string memory) {
-// //         return identities[msg.sender].attributes[attributeName];
-// //     }
-
-// //     function addCertificate(bytes32 certificate) external onlyRegisteredUser {
-// //         identities[msg.sender].certificates.push(certificate);
-// //         emit CertificateAdded(msg.sender, certificate);
-// //     }
-
-// //     function getCertificates() external view onlyRegisteredUser returns (bytes32[] memory) {
-// //         return identities[msg.sender].certificates;
-// //     }
-// // }
 
