@@ -23,6 +23,7 @@ contract UserRegistration {
         _;
     }
 
+    // modifier to check that user is already registered
     modifier onlyRegistered() {
         require(users[msg.sender].isRegistered, "USERREG: User not registered");
         _;
@@ -61,5 +62,9 @@ contract UserRegistration {
         users[msg.sender].isRegistered = false;
 
         emit UserDeactivated(msg.sender);
+    }
+
+    function checkUserRegistration(address userAddress) external view returns(bool) {
+        return users[userAddress].isRegistered;
     }
 }
