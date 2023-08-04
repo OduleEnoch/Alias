@@ -44,6 +44,11 @@ async function main() {
         // script for deactivating a registered user's account (SUCCESS)
             registeredUser = await userContract.deactivateUser();
             console.log("User Deactivated successfully");
+
+    // **************CHECK USER REGISTRATION***********
+        // script foor checking if a user is registered (SUCCESS)
+            let userState = await userContract.checkUserRegistration(owner.address);
+            console.log(userState);
 }
 
 main().catch((error) => {
